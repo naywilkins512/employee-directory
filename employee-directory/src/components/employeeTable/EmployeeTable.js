@@ -6,25 +6,26 @@ function EmployeeTable() {
 
 
     const [employeeState, setEmployeeState] = useState(employees);
+    const [employeeSortState, setEmployeeSortState] = useState(employees);
     const [searchState, setSearchState] = useState("");
    
 
 
     // sorting function
 
-    // const compareBy = (name) => {
-    //     return function (a, b) {
-    //         if (a[name] < b[name]) return -1;
-    //         if (a[name] > b[name]) return 1;
-    //         return 0;
-    //     };
-    // }
+    const compareBy = (name) => {
+        return function (a, b) {
+            if (a[name] < b[name]) return -1;
+            if (a[name] > b[name]) return 1;
+            return 0;
+        };
+    }
 
-    // const sortBy = (employeeState) => {
-    //     let arrayCopy = [...employeeState];
-    //     arrayCopy.sort(compareBy(employeeState.name));
-    //     ({ arrayCopy });
-    // }
+    const sortBy = (name) => {
+        let arrayCopy = [...employeeSortState];
+        arrayCopy.sort(compareBy(name));
+        setEmployeeSortState({ name: arrayCopy });
+    }
 
 
 
@@ -52,7 +53,7 @@ function EmployeeTable() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" >Name</th>
+                        <th scope="col" onClick={sortBy('name')}>Name</th>
                         <th scope="col">Occupation</th>
                         <th scope="col">Location</th>
                     </tr>
