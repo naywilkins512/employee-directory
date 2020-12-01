@@ -6,7 +6,6 @@ function EmployeeTable() {
 
 
     const [employeeState, setEmployeeState] = useState(employees);
-    const [employeeSortState, setEmployeeSortState] = useState(employees);
     const [searchState, setSearchState] = useState("");
    
 
@@ -22,9 +21,9 @@ function EmployeeTable() {
     }
 
     const sortBy = (name) => {
-        let arrayCopy = [...employeeSortState];
+        let arrayCopy = [...employeeState];
         arrayCopy.sort(compareBy(name));
-        setEmployeeSortState({ name: arrayCopy });
+        setEmployeeState(arrayCopy);
     }
 
 
@@ -53,7 +52,7 @@ function EmployeeTable() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" onClick={sortBy('name')}>Name</th>
+                        <th scope="col" onClick={() => sortBy('name')}>Name</th>
                         <th scope="col">Occupation</th>
                         <th scope="col">Location</th>
                     </tr>
